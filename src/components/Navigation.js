@@ -14,7 +14,7 @@ const Header = () => {
 const Navigation = ({ Element }) => {
   const menus = [
     { name: "Home", link: '/', icon: "fa solid fa-house cursor-pointer" },
-    { name: "Students List", link: '/', icon: "fa solid fa-list-ul cursor-pointer" },
+    { name: "Students List", link: '/students', icon: "fa solid fa-list-ul cursor-pointer" },
     { name: "Manage Students", link: '/', icon: "fa solid fa-user cursor-pointer" },
     { name: "Manage Staff", link: '/', icon: "fa solid fa-user cursor-pointer", margin: true }
   ];
@@ -25,7 +25,7 @@ const Navigation = ({ Element }) => {
     <div className=''>
       <Header />
       <section className='flex'>
-        <div className={`bg-customColor min-h-screen ${open ? "w-72" : "w-16"} duration-500 text-customLight px-4`}>
+        <div className={`bg-customColor min-h-screen ${open ? "w-64" : "w-16"} duration-500 text-customLight px-4`}>
 
           <div className={`py-3 ${!open && "mr-[10px]"} flex justify-end`}>
             <i className="fa-solid fa-bars cursor-pointer" onClick={() => { setOpen(!open) }}></i>
