@@ -1,10 +1,16 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/pages/Home';
 import './App.css';
 
 function App() {
   return (
-    <h1 className='text-customColor text-3xl'>
-      Student Management web application
-    </h1>
+    <div>
+      <Router>
+        <Routes>
+          <Route exact path='/' element={<Home />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
