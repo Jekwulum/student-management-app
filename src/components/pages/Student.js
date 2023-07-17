@@ -12,7 +12,7 @@ const Body = () => {
     const fetchStudents = async () => {
       try {
         const responseData = await getStudents();
-        if (responseData?.message === "SUCCESS") {
+        if (mounted && responseData?.status === "SUCCESS") {
           setStudents(responseData?.data);
           setLoading(false);
         } else setLoading(true);
