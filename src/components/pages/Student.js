@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import EditStudentModal from '../utilities/modals/EditStudentModal';
+import EditStudentInfoModal from '../utilities/modals/EditStudentInfoModal';
 import Loader from '../utilities/Loader';
 import Navigation from '../Navigation';
 import { Table } from '../utilities/table/Table';
@@ -17,14 +17,18 @@ const Body = () => {
     setShowEditModal(true);
   };
   const changeEditInfoRenderStatus = () => setShowEditModal(false);
-  const editStudentInfoModal = showEditModal ? <EditStudentModal onchange={changeEditInfoRenderStatus} data={studentInfo} /> : null;
+  const editStudentInfoModal = showEditModal ? <EditStudentInfoModal onchange={changeEditInfoRenderStatus} data={studentInfo} /> : null;
 
   const actionColumn = {
     Header: 'Action', accessor: 'action',
     Cell: ({ row }) => (
       <div className="flex gap-1 items-center">
-        <button className='bg-green-500 text-white text-lg hover:cursor-pointer w-7 h-7 rounded-sm hover:bg-gray-700 duration-500 transition-all'><i class="fa-solid fa-pen-to-square"></i></button>
-        <button className='bg-red-400 text-white text-lg hover:cursor-pointer w-7 h-7 rounded-sm hover:bg-gray-700 duration-500 transition-all'><i class="fa-solid fa-trash"></i></button>
+        <button onClick={() => editStudentinfo(row.original)}
+          className='bg-green-500 text-white text-lg hover:cursor-pointer w-7 h-7 rounded-sm hover:bg-gray-700 duration-500 transition-all'>
+          <i className="fa-solid fa-pen-to-square"></i></button>
+        <button
+          className='bg-red-400 text-white text-lg hover:cursor-pointer w-7 h-7 rounded-sm hover:bg-gray-700 duration-500 transition-all'>
+          <i className="fa-solid fa-trash"></i></button>
       </div>
     )
   };
@@ -51,15 +55,14 @@ const Body = () => {
     fetchStudents();
     console.log(students);
     return () => mounted = false;
-  });
+  }, []);
 
   return (
     <div className='w-full'>
       {loading ? <Loader /> :
         <div>
-          {/* <div className=" bg-red-300"> */}
-            <Table columnsHeaders={tableObject} data={students} />
-          {/* </div> */}
+          {editStudentInfoModal}
+          <Table columnsHeaders={tableObject} data={students} />
         </div>
       }
     </div>

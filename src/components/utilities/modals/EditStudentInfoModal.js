@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { editStudent } from '../../../services/CRUD.service';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const EditStudentModal = ({ onchange, data }) => {
+const EditStudentInfoModal = ({ onchange, data }) => {
   const [showModal, setShowModal] = useState(true);
   const [first_name, setFirstName] = useState(data.firstName);
   const [last_name, setLastName] = useState(data.lastName);
-  const [course, setCourse] = useState(data.lastName);
+  const [course, setCourse] = useState(data.course);
 
   const handleClose = () => {
     setShowModal(false);
@@ -13,12 +15,12 @@ const EditStudentModal = ({ onchange, data }) => {
   };
 
   const saveChanges = async (id) => {
-    const payload = { first_name, last_name, };
-    console.log(payload);
+    const payload = { first_name, last_name, course};
     const response = await editStudent(id, payload);
     if (response.status === "SUCCESS") {
-      alert("Success");
-      handleClose();
+      console.log(response);
+      toast(response?.message);
+      // handleClose();
       window.location.reload();
     } else {
       alert(`operation failed: ${response.message}`);
@@ -27,6 +29,7 @@ const EditStudentModal = ({ onchange, data }) => {
 
   return (
     <>
+    <ToastContainer />
       {showModal ? (
         <>
           <div
@@ -40,40 +43,25 @@ const EditStudentModal = ({ onchange, data }) => {
                   <h3 className="text-3xl font-semibold">
                     Edit student info <i className="zmdi zmdi-edit ml-2"></i>
                   </h3>
-                  {/* <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={() => setShowModal(false)}
-                  >
-                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                      ×
-                    </span>
-                  </button> */}
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  {/* <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                    I always felt like I could do anything. That’s the main
-                    thing people are controlled by! Thoughts- their perception
-                    of themselves! They're slowed down by their perception of
-                    themselves. If you're taught you can’t do anything, you
-                    won’t do anything. I was taught I could do everything.
-                  </p> */}
                   <div>
                     <label htmlFor="first_name" className="inline-block">First Name:</label>
                     <input type="text" id="first_name" onChange={e => setFirstName(e.target.value)} value={first_name}
-                      className="border h-8 w-[300px] text-sm m-1 p-2 ml-2 focus:outline-none bg-gray-200` text-custom-bgColor' placeholder='First Name' " />
+                      className="border h-8 w-[300px] text-sm m-1 p-2 ml-2 focus:outline-none bg-gray-200` text-customColor' placeholder='First Name' " />
                   </div>
 
                   <div>
                     <label htmlFor="last_name">Last Name:</label>
                     <input type="text" id="last_name" onChange={e => setLastName(e.target.value)} value={last_name}
-                      className="border h-8 w-[300px] text-sm m-1 p-2 ml-2 focus:outline-none bg-gray-200` text-custom-bgColor' placeholder='Last Name' " />
+                      className="border h-8 w-[300px] text-sm m-1 p-2 ml-2 focus:outline-none bg-gray-200` text-customColor' placeholder='Last Name' " />
                   </div>
 
                   <div className="space-x-[37px]">
-                    <label htmlFor="phone" className="inline-block text-right">Course:</label>
-                    <input type="text" id="phone" onChange={e => setCourse(e.target.value)} value={course}
-                      className="border h-8 w-[300px] text-sm m-1 p-2 ml-2 focus:outline-none bg-gray-200` text-custom-bgColor' placeholder='Phone' " />
+                    <label htmlFor="course" className="inline-block text-right">Course:</label>
+                    <input type="text" id="course" onChange={e => setCourse(e.target.value)} value={course}
+                      className="border h-8 w-[300px] text-sm m-1 p-2 ml-2 focus:outline-none bg-gray-200` text-customColor' placeholder='Phone' " />
                   </div>
                 </div>
 
@@ -81,14 +69,14 @@ const EditStudentModal = ({ onchange, data }) => {
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                   <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className="text-red-500 hover:bg-red-500 hover:text-white background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-200"
                     type="button"
                     onClick={() => handleClose()}
                   >
                     Close
                   </button>
                   <button
-                    className="bg-custom-bgColor text-white active:bg-custom-bgColor font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className="bg-customColor text-white hover:bg-gray-700 active:bg-customColor font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-200"
                     type="button"
                     onClick={() => saveChanges(data.studentId)}
                   >
@@ -105,4 +93,4 @@ const EditStudentModal = ({ onchange, data }) => {
   )
 }
 
-export default EditStudentModal;
+export default EditStudentInfoModal
