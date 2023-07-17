@@ -1,11 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import Loader from '../Loader';
+import EditStudentModal from '../utilities/modals/EditStudentModal';
+import Loader from '../utilities/Loader';
 import Navigation from '../Navigation';
+import { Table } from '../utilities/table/Table';
 import { getStudents } from '../../services/CRUD.service';
+import { studentTableConfig } from '../../services/dataTableConfig';
 
 const Body = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [studentInfo, setStudentInfo] = useState();
+  const [showEditModal, setShowEditModal] = useState(false);
+  const editStudentinfo = info => {
+    setStudentInfo(info);
+    setShowEditModal(true);
+  };
+  const changeEditInfoRenderStatus = () => setShowEditModal(false);
+  const editStudentInfoModal = showEditModal ? <EditStudentModal onchange={changeEditInfoRenderStatus} data={studentInfo} /> : null;
+
+  const actionColumn = {
+    Header: 'Action', accessor: 'action',
+    Cell: ({ row }) => (
+      <div className="flex gap-1 items-center">
+        <button className='bg-green-500 text-white text-lg hover:cursor-pointer w-7 h-7 rounded-sm hover:bg-gray-700 duration-500 transition-all'><i class="fa-solid fa-pen-to-square"></i></button>
+        <button className='bg-red-400 text-white text-lg hover:cursor-pointer w-7 h-7 rounded-sm hover:bg-gray-700 duration-500 transition-all'><i class="fa-solid fa-trash"></i></button>
+      </div>
+    )
+  };
+  const tableObject = [...studentTableConfig, actionColumn];
 
   useEffect(() => {
     let mounted = true;
@@ -13,7 +36,11 @@ const Body = () => {
       try {
         const responseData = await getStudents();
         if (mounted && responseData?.status === "SUCCESS") {
-          setStudents(responseData?.data);
+          const transformedData = responseData.data?.map(student => ({
+            ...student,
+            full_name: `${student.firstName} ${student.lastName}`
+          }))
+          setStudents(transformedData);
           setLoading(false);
         } else setLoading(true);
       } catch (error) {
@@ -30,7 +57,9 @@ const Body = () => {
     <div className='w-full'>
       {loading ? <Loader /> :
         <div>
-          <p>Student</p>
+          {/* <div className=" bg-red-300"> */}
+            <Table columnsHeaders={tableObject} data={students} />
+          {/* </div> */}
         </div>
       }
     </div>
