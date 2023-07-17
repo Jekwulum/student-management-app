@@ -8,7 +8,7 @@ const Body = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let mounted = true;
+    let mounted = false;
     const fetchStudents = async () => {
       try {
         const responseData = await getStudents();
@@ -27,7 +27,7 @@ const Body = () => {
   });
 
   return (
-    <div className=''>
+    <div className='w-full'>
       {loading ? <Loader /> :
         <div>
           <p>Student</p>
