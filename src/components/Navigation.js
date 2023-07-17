@@ -25,9 +25,9 @@ const Navigation = ({ Element }) => {
     <div className=''>
       <Header />
       <section className='flex'>
-        <div className={`bg-customColor min-h-screen ${open ? "w-64" : "w-16"} duration-500 text-customLight px-4`}>
+        <div className={`bg-customColor min-h-screen ${open ? "w-4/12" : "w-1/12"} duration-500 text-customLight px-4`}>
 
-          <div className={`py-3 ${!open && "mr-[10px]"} flex justify-end`}>
+          <div className={`py-3 ${!open && ""} flex justify-end`}>
             <i className="fa-solid fa-bars cursor-pointer" onClick={() => { setOpen(!open) }}></i>
           </div>
 
@@ -58,7 +58,9 @@ const Navigation = ({ Element }) => {
 
         </div>
 
-        <Element />
+        <div className={`${open ? "w-8/12" : "w-11/12"} transition-all ease-in-out duration-500`}>
+          <Element />
+        </div>
       </section>
     </div>
   )

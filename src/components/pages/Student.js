@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Loader from '../Loader';
 import Navigation from '../Navigation';
 import { getStudents } from '../../services/CRUD.service';
 
 const Body = () => {
   const [students, setStudents] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = true;
@@ -18,13 +20,19 @@ const Body = () => {
         console.error("Error: ", error);
       }
     };
-    
+
     fetchStudents();
     return () => mounted = false;
   });
 
   return (
-    <div>Student</div>
+    <div className=''>
+      {loading ? <Loader /> :
+        <div>
+          <p>Student</p>
+        </div>
+      }
+    </div>
   )
 }
 
