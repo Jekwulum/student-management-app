@@ -7,6 +7,12 @@ export function getStudents() {
     .catch(error => console.error("Error: ", error));
 };
 
+export function addStudent(payload) {
+  return Axios.post(`/students/`, payload)
+    .then(response => response.data)
+    .catch(error => console.error("Error: ", error));
+};
+
 export function editStudent(id, payload) {
   return Axios.patch(`/students/${id}`, payload)
     .then(response => response.data)

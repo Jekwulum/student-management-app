@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
-import { editStudent } from '../../../services/CRUD.service';
+import { addStudent } from '../../../services/CRUD.service';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const EditStudentInfoModal = ({ onchange, data }) => {
+const AddStudentModal = ({ onchange, data }) => {
   const [showModal, setShowModal] = useState(true);
-  const [first_name, setFirstName] = useState(data.firstName);
-  const [last_name, setLastName] = useState(data.lastName);
-  const [course, setCourse] = useState(data.course);
+  const [payload, setPayload] = useState({ firstName: "", lastName: "", course: "", email: "" });
 
   const handleClose = () => {
     setShowModal(false);
     onchange();
   };
 
-  const saveChanges = async (id) => {
-    const payload = { first_name, last_name, course};
-    const response = await editStudent(id, payload);
+  const saveChanges = async () => {
+    console.log(payload);
+    const response = await addStudent(payload);
     if (response.status === "SUCCESS") {
       toast.success(response?.message);
       // handleClose();
@@ -28,7 +26,7 @@ const EditStudentInfoModal = ({ onchange, data }) => {
 
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       {showModal && (
         <>
           <div
@@ -40,26 +38,32 @@ const EditStudentInfoModal = ({ onchange, data }) => {
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-3xl font-semibold">
-                    Edit student info <i className="zmdi zmdi-edit ml-2"></i>
+                    Add student record <i className="zmdi zmdi-edit ml-2"></i>
                   </h3>
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
                   <div>
                     <label htmlFor="first_name" className="inline-block">First Name:</label>
-                    <input type="text" id="first_name" onChange={e => setFirstName(e.target.value)} value={first_name}
+                    <input type="text" id="first_name" onChange={e => setPayload({ ...payload, firstName: e.target.value })} value={payload?.firstName}
                       className="border h-8 w-[300px] text-sm m-1 p-2 ml-2 focus:outline-none bg-gray-200` text-customColor' placeholder='First Name' " />
                   </div>
 
                   <div>
                     <label htmlFor="last_name">Last Name:</label>
-                    <input type="text" id="last_name" onChange={e => setLastName(e.target.value)} value={last_name}
+                    <input type="text" id="last_name" onChange={e => setPayload({ ...payload, lastName: e.target.value })} value={payload?.lastName}
                       className="border h-8 w-[300px] text-sm m-1 p-2 ml-2 focus:outline-none bg-gray-200` text-customColor' placeholder='Last Name' " />
                   </div>
 
                   <div className="space-x-[37px]">
+                    <label htmlFor="course" className="inline-block text-right">Email:</label>
+                    <input type="email" id="course" onChange={e => setPayload({ ...payload, email: e.target.value })} value={payload?.email}
+                      className="border h-8 w-[300px] text-sm m-1 p-2 ml-2 focus:outline-none bg-gray-200` text-customColor' placeholder='Phone' " />
+                  </div>
+
+                  <div className="space-x-[37px]">
                     <label htmlFor="course" className="inline-block text-right">Course:</label>
-                    <input type="text" id="course" onChange={e => setCourse(e.target.value)} value={course}
+                    <input type="text" id="course" onChange={e => setPayload({ ...payload, course: e.target.value })} value={payload?.course}
                       className="border h-8 w-[300px] text-sm m-1 p-2 ml-2 focus:outline-none bg-gray-200` text-customColor' placeholder='Phone' " />
                   </div>
                 </div>
@@ -77,7 +81,7 @@ const EditStudentInfoModal = ({ onchange, data }) => {
                   <button
                     className="bg-customColor text-white hover:bg-gray-700 active:bg-customColor font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-200"
                     type="button"
-                    onClick={() => saveChanges(data.studentId)}
+                    onClick={() => saveChanges()}
                   >
                     Save Changes
                   </button>
@@ -92,4 +96,4 @@ const EditStudentInfoModal = ({ onchange, data }) => {
   )
 }
 
-export default EditStudentInfoModal
+export default AddStudentModal;

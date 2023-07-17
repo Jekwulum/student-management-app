@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AddStudentModal from '../utilities/modals/AddStudentModal';
 import DeleteStudentInfoModal from '../utilities/modals/DeleteStudentInfoModal';
 import EditStudentInfoModal from '../utilities/modals/EditStudentInfoModal';
 import Loader from '../utilities/Loader';
@@ -10,6 +11,13 @@ import { studentTableConfig } from '../../services/dataTableConfig';
 const Body = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [showAddModal, setShowAddModal] = useState(false);
+  const addStudentRecord = () => {
+    setShowAddModal(true);
+  };
+  const changeAddRecordRenderStatus = () => setShowAddModal(false);
+  const addStudentInfoModal = showAddModal && <AddStudentModal onchange={changeAddRecordRenderStatus} />;
 
   const [studentInfo, setStudentInfo] = useState();
   const [showEditModal, setShowEditModal] = useState(false);
@@ -70,8 +78,13 @@ const Body = () => {
     <div className='w-full'>
       {loading ? <Loader /> :
         <div>
+          {addStudentInfoModal}
           {editStudentInfoModal}
           {deleteInfoModal}
+          <div className='mt-5 flex justify-start m-2'>
+            <button onClick={() => addStudentRecord()}
+              className='h-8 w-24 bg-green-500 rounded-md hover:bg-gray-700 text-white'>Add Student</button>
+          </div>
           <Table columnsHeaders={tableObject} data={students} />
         </div>
       }
