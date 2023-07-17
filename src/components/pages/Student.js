@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import DeleteStudentInfoModal from '../utilities/modals/DeleteStudentInfoModal';
 import EditStudentInfoModal from '../utilities/modals/EditStudentInfoModal';
 import Loader from '../utilities/Loader';
 import Navigation from '../Navigation';
@@ -19,6 +20,14 @@ const Body = () => {
   const changeEditInfoRenderStatus = () => setShowEditModal(false);
   const editStudentInfoModal = showEditModal ? <EditStudentInfoModal onchange={changeEditInfoRenderStatus} data={studentInfo} /> : null;
 
+  const [showDeleteModal, setDeleteModal] = useState(false);
+  const deleteStudentInfo = info => {
+    setStudentInfo(info);
+    setDeleteModal(true);
+  };
+  const changeDeleteInfoRenderStatus = () => setDeleteModal(false);
+  const deleteInfoModal = showDeleteModal ? <DeleteStudentInfoModal onchange={changeDeleteInfoRenderStatus} data={studentInfo} /> : null;
+
   const actionColumn = {
     Header: 'Action', accessor: 'action',
     Cell: ({ row }) => (
@@ -26,7 +35,7 @@ const Body = () => {
         <button onClick={() => editStudentinfo(row.original)}
           className='bg-green-500 text-white text-lg hover:cursor-pointer w-7 h-7 rounded-sm hover:bg-gray-700 duration-500 transition-all'>
           <i className="fa-solid fa-pen-to-square"></i></button>
-        <button
+        <button onClick={() => deleteStudentInfo(row.original)}
           className='bg-red-400 text-white text-lg hover:cursor-pointer w-7 h-7 rounded-sm hover:bg-gray-700 duration-500 transition-all'>
           <i className="fa-solid fa-trash"></i></button>
       </div>
@@ -62,6 +71,7 @@ const Body = () => {
       {loading ? <Loader /> :
         <div>
           {editStudentInfoModal}
+          {deleteInfoModal}
           <Table columnsHeaders={tableObject} data={students} />
         </div>
       }

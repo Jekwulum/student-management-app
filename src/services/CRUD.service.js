@@ -12,3 +12,9 @@ export function editStudent(id, payload) {
     .then(response => response.data)
     .catch(error => console.error("Error: ", error));
 };
+
+export function deleteStudent(id) {
+  return Axios.delete(`/students/${id}`)
+    .then(response => response)
+    .catch(error => console.error("Error: ", error));
+};
