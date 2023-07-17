@@ -8,7 +8,7 @@ const Body = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let mounted = false;
+    let mounted = true;
     const fetchStudents = async () => {
       try {
         const responseData = await getStudents();
