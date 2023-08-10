@@ -4,9 +4,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const EditStudentInfoModal = ({ onchange, data }) => {
+  console.log("data: ", data);
   const [showModal, setShowModal] = useState(true);
-  const [first_name, setFirstName] = useState(data.firstName);
-  const [last_name, setLastName] = useState(data.lastName);
+  const [first_name, setFirstName] = useState(data.user.first_name);
+  const [last_name, setLastName] = useState(data.user.last_name);
   const [course, setCourse] = useState(data.course);
 
   const handleClose = () => {
@@ -15,7 +16,7 @@ const EditStudentInfoModal = ({ onchange, data }) => {
   };
 
   const saveChanges = async (id) => {
-    const payload = { first_name, last_name, course};
+    const payload = { first_name, last_name, course };
     const response = await editStudent(id, payload);
     if (response.status === "SUCCESS") {
       toast.success(response?.message);
@@ -28,7 +29,7 @@ const EditStudentInfoModal = ({ onchange, data }) => {
 
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       {showModal && (
         <>
           <div
@@ -45,22 +46,22 @@ const EditStudentInfoModal = ({ onchange, data }) => {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <div>
-                    <label htmlFor="first_name" className="inline-block">First Name:</label>
+                  <div className="flex flex-col space-y-1 mb-3">
+                    <label htmlFor="first_name" className="">First Name</label>
                     <input type="text" id="first_name" onChange={e => setFirstName(e.target.value)} value={first_name}
-                      className="border h-8 w-[300px] text-sm m-1 p-2 ml-2 focus:outline-none bg-gray-200` text-customColor' placeholder='First Name' " />
+                      className="border border-customColor h-8 w-full text-sm p-2 focus:outline-none bg-gray-200` text-customColor' placeholder='First Name' " />
                   </div>
 
-                  <div>
-                    <label htmlFor="last_name">Last Name:</label>
+                  <div className="flex flex-col space-y-2 mb-3">
+                    <label htmlFor="last_name">Last Name</label>
                     <input type="text" id="last_name" onChange={e => setLastName(e.target.value)} value={last_name}
-                      className="border h-8 w-[300px] text-sm m-1 p-2 ml-2 focus:outline-none bg-gray-200` text-customColor' placeholder='Last Name' " />
+                      className="border border-customColor h-8 w-full text-sm p-2 focus:outline-none bg-gray-200` text-customColor' placeholder='Last Name' " />
                   </div>
 
-                  <div className="space-x-[37px]">
-                    <label htmlFor="course" className="inline-block text-right">Course:</label>
+                  <div className="flex flex-col space-y-2">
+                    <label htmlFor="course" className="">Course</label>
                     <input type="text" id="course" onChange={e => setCourse(e.target.value)} value={course}
-                      className="border h-8 w-[300px] text-sm m-1 p-2 ml-2 focus:outline-none bg-gray-200` text-customColor' placeholder='Phone' " />
+                      className="border border-customColor h-8 w-full text-sm p-2 focus:outline-none bg-gray-200` text-customColor' placeholder='Phone' " />
                   </div>
                 </div>
 
