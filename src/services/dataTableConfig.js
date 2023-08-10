@@ -2,7 +2,7 @@
 
 export const studentTableConfig = [
   { Header: 'Name', accessor: 'full_name' },
-  { Header: 'Email', accessor: 'email' },
-  { Header: 'RegNo', accessor: 'registrationNo' },
+  { Header: 'Email', accessor: 'user.email' },
+  { Header: 'RegNo', accessor: 'registration_num' },
   { Header: 'Course', accessor: 'course' },
 ];

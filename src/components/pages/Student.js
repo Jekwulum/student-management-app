@@ -59,9 +59,10 @@ const Body = () => {
         if (mounted && responseData?.status === "SUCCESS") {
           const transformedData = responseData.data?.map(student => ({
             ...student,
-            full_name: `${student.firstName} ${student.lastName}`
+            full_name: `${student.user.first_name} ${student.user.last_name}`
           }))
           setStudents(transformedData);
+          console.log(transformedData)
           setLoading(false);
         } else setLoading(true);
       } catch (error) {
@@ -70,7 +71,6 @@ const Body = () => {
     };
 
     fetchStudents();
-    console.log(students);
     return () => mounted = false;
   }, []);
 
