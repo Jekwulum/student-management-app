@@ -59,10 +59,10 @@ const Body = () => {
         if (mounted && responseData?.status === "SUCCESS") {
           const transformedData = responseData.data?.map(student => ({
             ...student,
+            email: `${student.user.email}`,
             full_name: `${student.user.first_name} ${student.user.last_name}`
           }))
           setStudents(transformedData);
-          console.log(transformedData)
           setLoading(false);
         } else setLoading(true);
       } catch (error) {
