@@ -19,6 +19,7 @@ const EditStudentInfoModal = ({ onchange, data }) => {
     const response = await editStudent(id, payload);
     if (response.status === "SUCCESS") {
       toast.success(response?.message);
+      setTimeout(1500);
       // handleClose();
       window.location.reload();
     } else {
@@ -34,7 +35,7 @@ const EditStudentInfoModal = ({ onchange, data }) => {
           <div
             className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
           >
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+            <div className="relative w-96 my-6 mx-auto max-w-3xl">
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
@@ -48,19 +49,19 @@ const EditStudentInfoModal = ({ onchange, data }) => {
                   <div className="flex flex-col space-y-1 mb-3">
                     <label htmlFor="first_name" className="">First Name</label>
                     <input type="text" id="first_name" onChange={e => setFirstName(e.target.value)} value={first_name}
-                      className="border border-customColor h-8 w-full text-sm p-2 focus:outline-none bg-gray-200` text-customColor' placeholder='First Name' " />
+                      className="border border-customColor h-8 w-full text-sm p-2 focus:outline-none bg-gray-200 text-customColor placeholder='First Name' " />
                   </div>
 
                   <div className="flex flex-col space-y-2 mb-3">
                     <label htmlFor="last_name">Last Name</label>
                     <input type="text" id="last_name" onChange={e => setLastName(e.target.value)} value={last_name}
-                      className="border border-customColor h-8 w-full text-sm p-2 focus:outline-none bg-gray-200` text-customColor' placeholder='Last Name' " />
+                      className="border border-customColor h-8 w-full text-sm p-2 focus:outline-none bg-gray-200 text-customColor placeholder='Last Name' " />
                   </div>
 
                   <div className="flex flex-col space-y-2">
                     <label htmlFor="course" className="">Course</label>
                     <input type="text" id="course" onChange={e => setCourse(e.target.value)} value={course}
-                      className="border border-customColor h-8 w-full text-sm p-2 focus:outline-none bg-gray-200` text-customColor' placeholder='Phone' " />
+                      className="border border-customColor h-8 w-full text-sm p-2 focus:outline-none bg-gray-200 text-customColor placeholder='Phone' " />
                   </div>
                 </div>
 

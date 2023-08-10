@@ -52,19 +52,24 @@ const Body = () => {
   const tableObject = [...studentTableConfig, actionColumn];
 
   useEffect(() => {
+    // setLoading(true);
     let mounted = true;
     const fetchStudents = async () => {
       try {
         const responseData = await getStudents();
-        if (mounted && responseData?.status === "SUCCESS") {
-          const transformedData = responseData.data?.map(student => ({
+        if (mounted && responseData?.status === "SUCCESS" && Array.isArray(responseData.data)) {
+          const transformedData = responseData.data.map(student => ({
             ...student,
             email: `${student.user.email}`,
             full_name: `${student.user.first_name} ${student.user.last_name}`
-          }))
+          }));
+
           setStudents(transformedData);
           setLoading(false);
-        } else setLoading(true);
+        } else {
+          setLoading(true);
+        }
+
       } catch (error) {
         console.error("Error: ", error);
       }

@@ -7,7 +7,7 @@ const DeleteStudentInfoModal = ({ onchange, data }) => {
   const [showModal, setShowModal] = useState(true);
   const [enteredRegNo, setEnteredRegNo] = useState();
 
-  const disabledBtn = enteredRegNo && data.registrationNo === enteredRegNo ? false : true;
+  const disabledBtn = enteredRegNo && (data.registration_num !== enteredRegNo);
 
   const handleClose = () => {
     setShowModal(false);
@@ -15,9 +15,10 @@ const DeleteStudentInfoModal = ({ onchange, data }) => {
   };
 
   const saveChanges = async () => {
-    const response = await deleteStudent(data.studentId);
+    const response = await deleteStudent(data.student_id);
     if (response.status === 204) {
       toast.success("Record successfully deleted");
+      setTimeout(1500);
       window.location.reload();
     } else {
       toast.error(`operation failed: ${response.message}`);
@@ -44,7 +45,7 @@ const DeleteStudentInfoModal = ({ onchange, data }) => {
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
                   <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                    Delete student record with Reg Number: <span className="text-red-500">{`${data.registrationNo}`}</span> <br />
+                    Delete student record with Reg Number: <span className="text-red-500">{`${data.registration_num}`}</span> <br />
                     Enter student Reg Number to confirm
                   </p>
 
@@ -63,8 +64,8 @@ const DeleteStudentInfoModal = ({ onchange, data }) => {
                     Close
                   </button>
                   <button
-                    disabled = {disabledBtn}
-                    className="bg-customColor text-white hover:bg-gray-700 active:bg-customColor font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-200"
+                    disabled={disabledBtn}
+                    className={`bg-customColor text-white ${disabledBtn ? "bg-gray-700" : "bg-customColor hover:bg-red-500"} font-bold uppercase text-sm px-6 py-3 rounded shadow outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-200`}
                     type="button"
                     onClick={() => saveChanges()}
                   >
