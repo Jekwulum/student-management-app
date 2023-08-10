@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import tokenHelper from '../services/helpers/tokenHelper';
 
 
 const Header = () => {
+  const handleLogout = () => {
+    tokenHelper.clearEncryptedToken();
+  };
   return (
-    <div className="bg-customColor w-full h-12 p-3 flex items-center gap-3 text-customLight text-lg">
-      <i className="fa-solid fa-graduation-cap text-lg"></i>
-      <p>Student Management Application</p>
+    <div className="bg-customColor w-full h-12 p-3 flex items-center justify-between gap-3 text-customLight text-lg">
+      <span className='flex items-center gap-3'>
+        <i className="fa-solid fa-graduation-cap text-lg"></i>
+        <p>Student Management Application</p>
+      </span>
+      <i
+        onClick={handleLogout}
+        className="fa-solid fa-right-from-bracket hover:cursor-pointer"></i>
     </div>
   )
 }
