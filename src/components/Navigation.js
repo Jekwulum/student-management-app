@@ -3,10 +3,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import tokenHelper from '../services/helpers/tokenHelper';
 
 
-const Header = () => {
-  const handleLogout = () => {
-    tokenHelper.clearEncryptedToken();
-  };
+const Header = ({ handleLogout }) => {
+
   return (
     <div className="bg-customColor w-full h-12 p-3 flex items-center justify-between gap-3 text-customLight text-lg">
       <span className='flex items-center gap-3'>
@@ -14,7 +12,7 @@ const Header = () => {
         <p>Student Management Application</p>
       </span>
       <i
-        onClick={handleLogout}
+        onClick={() => handleLogout()}
         className="fa-solid fa-right-from-bracket hover:cursor-pointer"></i>
     </div>
   )
@@ -28,11 +26,17 @@ const Navigation = ({ Element }) => {
     { name: "Manage Staff", link: '/', icon: "fa solid fa-user cursor-pointer", margin: true }
   ];
 
+  const navigate = useNavigate();
   const [open, setOpen] = useState(true);
+
+  const handleLogout = () => {
+    tokenHelper.clearEncryptedToken();
+    navigate('/login');
+  };
 
   return (
     <div className=''>
-      <Header />
+      <Header handleLogout={handleLogout} />
       <section className='flex'>
         <div className={`bg-customColor min-h-screen ${open ? "w-64" : "w-16"} duration-500 text-customLight px-4`}>
 
