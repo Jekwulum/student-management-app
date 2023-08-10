@@ -4,7 +4,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const EditStudentInfoModal = ({ onchange, data }) => {
-  console.log("data: ", data);
   const [showModal, setShowModal] = useState(true);
   const [first_name, setFirstName] = useState(data.user.first_name);
   const [last_name, setLastName] = useState(data.user.last_name);
@@ -16,7 +15,7 @@ const EditStudentInfoModal = ({ onchange, data }) => {
   };
 
   const saveChanges = async (id) => {
-    const payload = { first_name, last_name, course };
+    const payload = { user: { first_name, last_name }, course };
     const response = await editStudent(id, payload);
     if (response.status === "SUCCESS") {
       toast.success(response?.message);
@@ -78,7 +77,7 @@ const EditStudentInfoModal = ({ onchange, data }) => {
                   <button
                     className="bg-customColor text-white hover:bg-gray-700 active:bg-customColor font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-200"
                     type="button"
-                    onClick={() => saveChanges(data.studentId)}
+                    onClick={() => saveChanges(data.student_id)}
                   >
                     Save Changes
                   </button>
