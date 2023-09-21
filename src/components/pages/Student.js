@@ -5,6 +5,7 @@ import EditStudentInfoModal from '../utilities/modals/EditStudentInfoModal';
 import Loader from '../utilities/Loader';
 import Navigation from '../Navigation';
 import { Table } from '../utilities/table/Table';
+import { PaginationTable } from '../utilities/table/PaginationTable';
 import { getStudents } from '../../services/CRUD.service';
 import { studentTableConfig } from '../../services/dataTableConfig';
 
@@ -90,7 +91,7 @@ const Body = () => {
             <button onClick={() => addStudentRecord()}
               className='h-8 w-24 bg-green-500 rounded-md hover:bg-gray-700 text-white'>Add Student</button>
           </div>
-          <Table columnsHeaders={tableObject} data={students} />
+          <PaginationTable columnsHeaders={tableObject} data={students} />
         </div>
       }
     </div>
