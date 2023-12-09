@@ -43,10 +43,10 @@ const Login = () => {
         <h1 className='text-customColor font-bold text-2xl'>Log In</h1>
         <input
           type="email" placeholder='Email' onChange={e => setPayload({ ...payload, email: e.target.value })}
-          className='border-none rounded-lg w-64 h-10 p-2 outline-none shadow-lg shadow-deep-purple-300 text-customColor' />
+          className='border-none rounded-lg w-64 h-10 p-2 outline-none shadow-lg shadow-deep-purple-100 text-customColor' />
         <input
           type="password" placeholder='Password' onChange={e => setPayload({ ...payload, password: e.target.value })}
-          className='border-none rounded-lg w-64 h-10 p-2 outline-none shadow-lg shadow-deep-purple-300 text-customColor' />
+          className='border-none rounded-lg w-64 h-10 p-2 outline-none shadow-lg shadow-deep-purple-100 text-customColor' />
         <button
           onClick={handleLogin}
           className='bg-customColor h-9 w-24 rounded-lg text-white border-none hover:bg-customColor/[0.8]'>Login</button>

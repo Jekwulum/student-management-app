@@ -4,7 +4,7 @@ import DeleteStudentInfoModal from '../utilities/modals/DeleteStudentInfoModal';
 import EditStudentInfoModal from '../utilities/modals/EditStudentInfoModal';
 import Loader from '../utilities/Loader';
 import Navigation from '../Navigation';
-import { Table } from '../utilities/table/Table';
+import Header from '../utilities/headers/Header';
 import { PaginationTable } from '../utilities/table/PaginationTable';
 import { getStudents } from '../../services/CRUD.service';
 import { studentTableConfig } from '../../services/dataTableConfig';
@@ -82,6 +82,7 @@ const Body = () => {
 
   return (
     <div className='w-full'>
+      <Header pageName={'Students'} placeholder={'Search students here'}/>
       {loading ? <Loader /> :
         <div>
           {addStudentInfoModal}

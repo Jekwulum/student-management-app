@@ -19,6 +19,7 @@ function App() {
         <Routes>
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/' element={<ProtectedRoute Component={Home} />} />
+          <Route exact path='/dashboard' element={<ProtectedRoute Component={Home} />} />
           <Route exact path='/students' element={<ProtectedRoute Component={Student} />} />
         </Routes>
       </Router>

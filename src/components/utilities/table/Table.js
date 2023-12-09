@@ -34,7 +34,7 @@ export const Table = ({ columnsHeaders, data }) => {
           {rows.map((row, index) => {
             prepareRow(row)
             return (
-              <tr {...row.getRowProps()} className={index % 2 === 0 ? 'bg-white' : 'bg-customLight text-customColor'}>
+              <tr {...row.getRowProps()} className={index % 2 === 0 ? 'bg-[#dbeeff]' : 'bg-[#dbeeff] text-customColor'}>
                 {row.cells.map((cell) => {
                   return <td {...cell.getCellProps()} className="p-[6px]">
                     {cell.render('Cell')}</td>

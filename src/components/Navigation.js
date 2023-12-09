@@ -21,7 +21,8 @@ const Header = ({ handleLogout }) => {
 const Navigation = ({ Element }) => {
   const menus = [
     { name: "Home", link: '/', icon: "fa solid fa-house cursor-pointer" },
-    { name: "Students List", link: '/students', icon: "fa solid fa-list-ul cursor-pointer" },
+    { name: "Dashboard", link: '/dashboard', icon: "fa-solid fa-chart-line cursor-pointer" },
+    { name: "Students", link: '/students', icon: "fa solid fa-list-ul cursor-pointer" },
     { name: "Manage Students", link: '/', icon: "fa solid fa-user cursor-pointer" },
     { name: "Manage Staff", link: '/', icon: "fa solid fa-user cursor-pointer", margin: true }
   ];
