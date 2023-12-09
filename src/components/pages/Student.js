@@ -88,10 +88,12 @@ const Body = () => {
           {addStudentInfoModal}
           {editStudentInfoModal}
           {deleteInfoModal}
-          <div className='mt-5 flex justify-start m-2'>
+
+
+          {/* <div className='mt-5 flex justify-start m-2'>
             <button onClick={() => addStudentRecord()}
               className='h-8 w-24 bg-green-500 rounded-md hover:bg-gray-700 text-white'>Add Student</button>
-          </div>
+          </div> */}
           <PaginationTable columnsHeaders={tableObject} data={students} />
         </div>
       }
