@@ -7,7 +7,7 @@ const Header = ({ pageName, placeholder }) => {
       <div className='text-3xl font-bold'>{pageName}</div>
       <div className='flex items-center justify-center gap-x-3'>
         <input type="text" placeholder={placeholder} className='w-[1050px] md:w-full h-10 rounded-md text-xl border-2 border-customColor outline-none p-2' />
-        <i class="fa-regular fa-bell text-2xl cursor-pointer hover:bg-customLight p-3 rounded-full transition-all ease-in-out delay-150"></i>
+        <i className="fa-regular fa-bell text-2xl cursor-pointer hover:bg-customLight p-3 rounded-full transition-all ease-in-out delay-150"></i>
         <img src={profileImage} className='h-10 w-10 cursor-pointer hover:bg-customLight rounded-full transition-all ease-in-out delay-150' alt="" />
       </div>
     </div>

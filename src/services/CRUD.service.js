@@ -24,3 +24,9 @@ export function deleteStudent(id) {
     .then(response => response)
     .catch(error => console.error("Error: ", error));
 };
+
+export function getStudentAttendance(id) {
+  return Axios.get(`/attendance/${id}/student`)
+    .then(response => response)
+    .catch(error => console.error("Error: ", error));
+};

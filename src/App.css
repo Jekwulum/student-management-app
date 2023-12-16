@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.loading-gradient {
+  /* width: 200px; Set your desired width */
+  /* height: 50px; Set your desired height */
+  background: linear-gradient(90deg, #dbeeff 25%, rgb(144 202 249) 50%, #dbeeff 75%);
+  background-size: 200% 100%;
+  animation: loadingAnimation 1.5s linear infinite;
+}
+
+@keyframes loadingAnimation {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}

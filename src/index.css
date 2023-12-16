@@ -2,13 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
 body {
   font: 14px "Century Gothic", Fatura, sans-serif;
   margin: 0;
   background-color: #dbeeff;
+  font-family: 'Rubik', sans-serif;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
